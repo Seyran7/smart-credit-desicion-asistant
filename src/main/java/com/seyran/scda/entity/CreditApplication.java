@@ -34,7 +34,10 @@ public class CreditApplication {
     private BigDecimal monthlyIncome;
 
     @Column(nullable = false)
-    private BigDecimal employmentMonths;
+    private Integer employmentMonths;
+
+    @Column(nullable = false)
+    private BigDecimal existingMonthlyDebt;
 
     @Column(nullable = false)
     private BigDecimal requestedLoanAmount;
@@ -44,15 +47,18 @@ public class CreditApplication {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private LoanPurpose loanPurpose;
+    private LoanPurpose purpose;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ApplicationStatus status;
 
+    @Column(length = 1000)
+    private String operatorNote;
+
 
     @CreationTimestamp
-    @Column(updatable = false)
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
