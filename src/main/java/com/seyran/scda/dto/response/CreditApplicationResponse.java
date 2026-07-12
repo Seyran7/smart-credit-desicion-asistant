@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class CreditApplicationResponse {
 
+    private AIAnalysisResponse aiAnalysis;
+
     private Long  id;
     private String firstName;
     private String lastName;

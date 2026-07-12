@@ -56,6 +56,13 @@ public class CreditApplication {
     @Column(length = 1000)
     private String operatorNote;
 
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(name = "analysis_id")
+    private AIAnalysis aiAnalysis;
+
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)

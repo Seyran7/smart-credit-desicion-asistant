@@ -3,10 +3,13 @@ package com.seyran.scda.mapper;
 import com.seyran.scda.dto.request.CreditApplicationRequest;
 import com.seyran.scda.dto.response.CreditApplicationResponse;
 import com.seyran.scda.entity.CreditApplication;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class CreditApplicationMapper {
+    private final AIAnalysisMapper aiAnalysisMapper;
     public CreditApplication toEntity(CreditApplicationRequest request){
         return CreditApplication.builder()
                 .firstName(request.getFirstName())
@@ -35,6 +38,9 @@ public class CreditApplicationMapper {
                 .purpose(entity.getPurpose())
                 .status(entity.getStatus())
                 .createdAt(entity.getCreatedAt())
+                .aiAnalysis(
+                        aiAnalysisMapper.toResponse(entity.getAiAnalysis())
+                )
                 .build();
     }
     public void updateEntity(CreditApplicationRequest request, CreditApplication entity){
