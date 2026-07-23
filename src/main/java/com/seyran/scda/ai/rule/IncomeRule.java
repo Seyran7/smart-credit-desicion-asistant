@@ -13,34 +13,62 @@ public class IncomeRule implements CreditRule {
 
         BigDecimal income = application.getMonthlyIncome();
 
-        if (income.compareTo(BigDecimal.valueOf(3000)) >= 0) {
-
+        if (income.compareTo(BigDecimal.valueOf(4000)) >= 0) {
             return RuleResult.builder()
-                    .ruleName("Income Rule")
+                    .ruleName("Aylıq gəlir qaydası")
+                    .score(30)
+                    .passed(true)
+                    .explanation("Müştərinin aylıq gəliri çox yüksəkdir.")
+                    .strength("Aylıq gəlir çox yüksəkdir.")
+                    .build();
+        }
+
+        if (income.compareTo(BigDecimal.valueOf(3000)) >= 0) {
+            return RuleResult.builder()
+                    .ruleName("Aylıq gəlir qaydası")
                     .score(25)
                     .passed(true)
-                    .explanation("Monthly income is significantly above the required threshold.")
-                    .strength("Monthly income is excellent.")
+                    .explanation("Aylıq gəlir yüksək səviyyədədir.")
+                    .strength("Aylıq gəlir yüksəkdir.")
                     .build();
         }
 
         if (income.compareTo(BigDecimal.valueOf(2000)) >= 0) {
-
             return RuleResult.builder()
-                    .ruleName("Income Rule")
+                    .ruleName("Aylıq gəlir qaydası")
                     .score(15)
                     .passed(true)
-                    .explanation("Monthly income meets the minimum acceptable threshold.")
-                    .strength("Monthly income is acceptable.")
+                    .explanation("Aylıq gəlir bankın tələblərinə uyğundur.")
+                    .strength("Aylıq gəlir qənaətbəxşdir.")
+                    .build();
+        }
+
+        if (income.compareTo(BigDecimal.valueOf(1500)) >= 0) {
+            return RuleResult.builder()
+                    .ruleName("Aylıq gəlir qaydası")
+                    .score(5)
+                    .passed(true)
+                    .explanation("Aylıq gəlir minimal səviyyədə uyğundur.")
+                    .strength("Aylıq gəlir minimum tələblərə cavab verir.")
+                    .build();
+        }
+
+        if (income.compareTo(BigDecimal.valueOf(1000)) >= 0) {
+            return RuleResult.builder()
+                    .ruleName("Aylıq gəlir qaydası")
+                    .score(-10)
+                    .passed(false)
+                    .explanation("Aylıq gəlir kredit ödənişləri üçün risk yarada bilər.")
+                    .risk("Müştərinin aylıq gəliri aşağıdır.")
                     .build();
         }
 
         return RuleResult.builder()
-                .ruleName("Income Rule")
+                .ruleName("Aylıq gəlir qaydası")
                 .score(-20)
                 .passed(false)
-                .explanation("Monthly income is below the minimum acceptable threshold.")
-                .risk("Monthly income is too low.")
+                .explanation("Aylıq gəlir bankın minimum tələblərindən aşağıdır.")
+                .risk("Müştərinin aylıq gəliri çox aşağıdır.")
                 .build();
     }
 }

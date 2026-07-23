@@ -78,23 +78,25 @@ public class CreditApplicationController {
 
     @Operation(summary = "Get application by id")
     @GetMapping("/{id}")
-    public ResponseEntity<CreditApplicationResponse> getById(@PathVariable  Long id) {
+    public ResponseEntity<CreditApplicationResponse> getById(@PathVariable("id")  Long id) {
         return ResponseEntity.ok(creditApplicationService.getById(id));
     }
 
     @Operation(summary = "Update application")
     @PutMapping("/{id}")
-    public ResponseEntity<CreditApplicationResponse> update(@PathVariable Long id,@Valid @RequestBody CreditApplicationRequest request) {
+    public ResponseEntity<CreditApplicationResponse> update(@PathVariable("id") Long id,@Valid @RequestBody CreditApplicationRequest request) {
         return ResponseEntity.ok(creditApplicationService.update(id, request));
     }
 
     @Operation(summary = "Delete application")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         creditApplicationService.delete(id);
         return ResponseEntity.noContent().build();
     }
-    @Operation(summary = "Search credit applications")
+    @Operation(
+            summary = "Create credit application",
+            description = "Creates a new credit application and automatically performs AI analysis.")
     @GetMapping("/search")
     public ResponseEntity<Page<CreditApplicationResponse>> search(
 
@@ -139,10 +141,12 @@ public class CreditApplicationController {
                 )
         );
     }
-    @Operation(summary = "Get AI analysis by application id")
+    @Operation(
+            summary = "Get AI Analysis",
+            description = "Returns AI analysis generated for a specific credit application.")
     @GetMapping("/{id}/analysis")
     public ResponseEntity<AIAnalysisResponse> getAnalysis(
-            @PathVariable Long id) {
+            @PathVariable("id") Long id) {
 
         return ResponseEntity.ok(
                 creditApplicationService.getAnalysis(id)

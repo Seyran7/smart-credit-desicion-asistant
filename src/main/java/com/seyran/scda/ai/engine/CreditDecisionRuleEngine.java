@@ -17,6 +17,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CreditDecisionRuleEngine {
 
+    private static final int MAX_SCORE = 70;
+
     private final List<CreditRule> rules;
 
     public AIAnalysis analyze(CreditApplication application) {
@@ -43,13 +45,13 @@ public class CreditDecisionRuleEngine {
 
             totalScore += result.getScore();
 
-            if (result.getStrength() != null) {
+            if (result.getStrength() != null && !result.getStrength().isBlank()) {
                 strengths.append("✔ ")
                         .append(result.getStrength())
                         .append("\n");
             }
 
-            if (result.getRisk() != null) {
+            if (result.getRisk() != null && !result.getRisk().isBlank()) {
                 risks.append("⚠ ")
                         .append(result.getRisk())
                         .append("\n");
@@ -58,18 +60,33 @@ public class CreditDecisionRuleEngine {
 
         AIRecommendation recommendation;
 
-        if (totalScore >= 70) {
+        if (totalScore >= 60) {
             recommendation = AIRecommendation.APPROVE;
-        } else if (totalScore >= 40) {
+        } else if (totalScore >= 35) {
             recommendation = AIRecommendation.REVIEW;
         } else {
             recommendation = AIRecommendation.REJECT;
         }
 
-        String strengthsText = strengths.toString();
-        String risksText = risks.toString();
+        String strengthsText =
+                strengths.length() == 0
+                        ? "Mühüm üstünlük aşkar edilmədi."
+                        : strengths.toString();
 
-        int confidenceScore = Math.max(0, Math.min(totalScore, 100));
+        String risksText =
+                risks.length() == 0
+                        ? "Risk aşkar edilmədi."
+                        : risks.toString();
+
+        int confidenceScore =
+                Math.max(
+                        0,
+                        Math.min(
+                                100,
+                                (int) Math.round(((double) totalScore / MAX_SCORE) * 100)
+                        )
+                );
+
         int riskScore = 100 - confidenceScore;
 
         AIAnalysis analysis = AIAnalysis.builder()
