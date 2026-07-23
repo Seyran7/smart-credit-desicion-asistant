@@ -12,30 +12,39 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreditApplicationRequest {
-    @NotBlank(message = "First name cannot be blank")
-    @Size(min=2,max=50,message = "First name must be between 2 and 50 characters")
+
+    @NotBlank(message = "Ad daxil edilməlidir.")
+    @Size(min = 2, max = 50, message = "Ad 2 ilə 50 simvol arasında olmalıdır.")
     private String firstName;
-    @NotBlank(message = "Last name can not be blank")
-    @Size(min = 2, max = 50, message = "Last name must be between 2 and 50 characters")
+
+    @NotBlank(message = "Soyad daxil edilməlidir.")
+    @Size(min = 2, max = 50, message = "Soyad 2 ilə 50 simvol arasında olmalıdır.")
     private String lastName;
-    @NotBlank(message = "FIN code can not be blank")
-    @Size(min =7,max=7,message = "FIN code must contain exactly 7 characters")
+
+    @NotBlank(message = "FIN kodu daxil edilməlidir.")
+    @Size(min = 7, max = 7, message = "FIN kodu dəqiq 7 simvoldan ibarət olmalıdır.")
     private String finCode;
-    @NotNull(message = "Monthly income is required")
-    @Positive(message = "Monthly income must be greater than zero")
+
+    @NotNull(message = "Aylıq gəlir daxil edilməlidir.")
+    @Positive(message = "Aylıq gəlir 0-dan böyük olmalıdır.")
     private BigDecimal monthlyIncome;
-    @NotNull(message = "Employment months is required")
-    @PositiveOrZero(message = "Employment months cannot be negative")
+
+    @NotNull(message = "İş stajı daxil edilməlidir.")
+    @PositiveOrZero(message = "İş stajı mənfi ola bilməz.")
     private Integer employmentMonths;
-    @NotNull(message = "Existing monthly debt is required")
-    @PositiveOrZero(message = "Existing monthly debt cannot be negative")
-    private BigDecimal requestedLoanAmount;
-    @NotNull(message = "Requested loan amount is required")
-    @Positive(message = "Requested loan amount must be greater than zero")
+
+    @NotNull(message = "Cari aylıq borc daxil edilməlidir.")
+    @PositiveOrZero(message = "Cari aylıq borc mənfi ola bilməz.")
     private BigDecimal existingMonthlyDebt;
-    @NotNull(message = "Loan term is required")
-    @Positive(message = "Loan term must be greater than zero")
+
+    @NotNull(message = "İstənilən kredit məbləği daxil edilməlidir.")
+    @Positive(message = "İstənilən kredit məbləği 0-dan böyük olmalıdır.")
+    private BigDecimal requestedLoanAmount;
+
+    @NotNull(message = "Kredit müddəti daxil edilməlidir.")
+    @Positive(message = "Kredit müddəti 0-dan böyük olmalıdır.")
     private Integer loanTermMonths;
-    @NotNull(message = "Loan purpose is required")
+
+    @NotNull(message = "Kredit məqsədi seçilməlidir.")
     private LoanPurpose purpose;
 }

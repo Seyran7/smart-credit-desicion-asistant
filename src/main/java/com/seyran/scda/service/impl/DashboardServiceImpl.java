@@ -19,17 +19,16 @@ public class DashboardServiceImpl implements DashboardService {
         return DashboardResponse.builder()
 
                 .totalApplications(repository.count())
-
                 .approved(
-                        repository.countByRecommendation(
+                        repository.countByAiAnalysisRecommendation(
                                 AIRecommendation.APPROVE))
 
                 .review(
-                        repository.countByRecommendation(
+                        repository.countByAiAnalysisRecommendation(
                                 AIRecommendation.REVIEW))
 
                 .rejected(
-                        repository.countByRecommendation(
+                        repository.countByAiAnalysisRecommendation(
                                 AIRecommendation.REJECT))
 
                 .averageConfidence(

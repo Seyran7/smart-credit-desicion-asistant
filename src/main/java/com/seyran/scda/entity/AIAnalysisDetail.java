@@ -16,10 +16,13 @@ public class AIAnalysisDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String ruleName;
 
+    @Column(nullable = false)
     private Integer score;
 
+    @Column(nullable = false)
     private Boolean passed;
 
     @Column(length = 1000)

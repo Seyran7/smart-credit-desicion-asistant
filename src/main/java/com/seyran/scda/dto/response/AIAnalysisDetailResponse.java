@@ -1,9 +1,11 @@
 package com.seyran.scda.dto.response;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class AIAnalysisDetailResponse {
 

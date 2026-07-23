@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
-
 public interface CreditApplicationRepository
         extends JpaRepository<CreditApplication, Long>,
         JpaSpecificationExecutor<CreditApplication> {
@@ -27,12 +26,9 @@ public interface CreditApplicationRepository
             String lastName,
             Pageable pageable);
 
-    @Query("""
-            SELECT COUNT(c)
-            FROM CreditApplication c
-            WHERE c.aiAnalysis.recommendation = :recommendation
-            """)
-    long countByRecommendation(AIRecommendation recommendation);
+    long countByAiAnalysisRecommendation(
+            AIRecommendation recommendation
+    );
 
     @Query("""
             SELECT AVG(c.aiAnalysis.confidenceScore)
