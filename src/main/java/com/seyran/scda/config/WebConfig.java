@@ -9,11 +9,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig {
 
     @Bean
-    public WebMvcConfigurer corsConfigurer() {
+    public WebMvcConfigurer customCorsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**") // Bütün endpoint-lər üçün
+                registry.addMapping("/**")
                         .allowedOrigins(
                                 "https://smartcreditai.vercel.app",
                                 "http://localhost:5173",
